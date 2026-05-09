@@ -1,6 +1,7 @@
 package org.example;
 
 public class Vehicle {
+    //<editor-fold desc="Vehicle Constructor">
     private int vin;
     private int year;
     private String make;
@@ -87,16 +88,16 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "vin=" + vin +
-                ", year=" + year +
-                ", make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", type='" + type + '\'' +
-                ", color='" + color + '\'' +
-                ", odometer=" + odometer +
-                ", price=" + price +
-                '}';
+        return "Painter Garage|1002 Main Street|803-209-6747\n" +
+                vin +
+                "|" + year +
+                "|" + make +
+                "|" + model +
+                "|" + type +
+                "|" + color +
+                "|" + odometer +
+                "|" + price;
     }
-}
 
+    // </editor-fold>
+}
