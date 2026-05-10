@@ -12,7 +12,7 @@ public class Dealership {
     private String Name;
     private String Address;
     private String Phone;
-    private ArrayList<Vehicle> inventory;
+    private final ArrayList<Vehicle> inventory;
     // new arry llist
     //  this. new aray tho
 
@@ -46,6 +46,9 @@ public class Dealership {
     public void setPhone(String phone) {
         Phone = phone;
     }
+    // </editor-fold>
+
+    //<editor-fold desc="Dealership Methods">
 // takes the vehicle object and adds it to the dealership list
     public void addVehicle(Vehicle vehicle){
         inventory.add(vehicle);
@@ -55,40 +58,58 @@ public class Dealership {
         inventory.remove(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle){
-        inventory.remove(vehicle);
-    }
-// </editor-fold>
-
-    // habveit in the constructor to add it to the inventory and removie it fromt the inventory
-    public static void byPrice(){
-
-
+    public List<Vehicle> getAllVehicles(){
+        return inventory;
     }
 
-    public static void byMakeModel() {
-
+    public void byPrice(double min, double max){
+        for(Vehicle v: inventory){
+            if(v.getPrice() >= min && v.getPrice() <= max){
+                v.toString();
+            }
+        }
     }
 
-    public static void byYear() {
-
+    public void byMakeModel(String make, String model){
+        for(Vehicle v:inventory){
+            if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)){
+                v.toString();
+            }
+        }
     }
 
-    public static void byColor() {
-
+    public void byYear(int min, int max){
+        for(Vehicle v : inventory){
+            if(v.getYear() >= min && v.getYear() <= max){
+                v.toString();
+            }
+        }
     }
 
-    public static void byMileage() {
-
+    public void byColor(String color) {
+        for(Vehicle v : inventory){
+            if(v.getColor().equalsIgnoreCase(color)){
+                v.toString();
+            }
+        }
     }
 
-    public static void byType() {
-
+    public void byMileage(int min, int max){
+        for(Vehicle v : inventory){
+            if(v.getOdometer() >= min && v.getOdometer() <= max){
+                v.toString();
+            }
+        }
     }
 
-    public static void allVehicles(){
-
+    public void byType(String type){
+        for(Vehicle v : inventory){
+            if(v.getType().equalsIgnoreCase(type)){
+                v.toString();
+            }
+        }
     }
+    //</editor-fold>
 
 }
 

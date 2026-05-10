@@ -56,9 +56,10 @@ public class DealershipFileManager {
                 fileWriter.write(header);
             }
 
-            for(Vehicle V : dealership.getAllVehicles)
-            fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getType(),v.getColor(),v.getOdometer(),v.getPrice())
-            );
+            for(Vehicle V : dealership.getAllVehicles()) {
+                fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", V.getVin(), V.getYear(), V.getMake(), V.getModel(), V.getType(), V.getColor(), V.getOdometer(), V.getPrice())
+                );
+            }
 
             fileWriter.close();
         }
