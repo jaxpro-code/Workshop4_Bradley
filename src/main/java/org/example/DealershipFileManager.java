@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.example.Dealership.*;
 import org.example.Vehicle.*;
+import org.example.UserInterface.*;
+
 
 public class DealershipFileManager {
     // the file belongs to the object dealership
@@ -44,17 +46,18 @@ public class DealershipFileManager {
 
     return dealership;
 }
-    public static void writeStock (Vehicle car){
+    public void writeDealership(Dealership dealership){
         try {
             File file = new File("src/main/resources/Vehicle.csv");
-
             FileWriter fileWriter = new FileWriter(file, true);
 
-            if (file.length() > 0) {
-                fileWriter.write(System.lineSeparator());
+            if(file.length() < 0){
+                String header = String.format("%s|%s|%s\n", dealership.getName(),dealership.getAddress(),dealership.getPhone());
+                fileWriter.write(header);
             }
 
-            fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", car.getVin(),car.getYear(),car.getMake(),car.getModel(),car.getType(),car.getColor(),car.getOdometer(),car.getPrice())
+            for(Vehicle V : dealership.getAllVehicles)
+            fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", v.getVin(),v.getYear(),v.getMake(),v.getModel(),v.getType(),v.getColor(),v.getOdometer(),v.getPrice())
             );
 
             fileWriter.close();

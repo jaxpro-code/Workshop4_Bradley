@@ -61,7 +61,8 @@ public class Dealership {
 // </editor-fold>
 
     // habveit in the constructor to add it to the inventory and removie it fromt the inventory
-    public static void byPrice() {
+    public static void byPrice(){
+
 
     }
 
@@ -85,7 +86,7 @@ public class Dealership {
 
     }
 
-    public static void allVehicles() {
+    public static void allVehicles(){
 
     }
 
