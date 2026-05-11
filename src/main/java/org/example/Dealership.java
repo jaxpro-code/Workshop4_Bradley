@@ -3,7 +3,7 @@ package org.example;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.example.UserInterface.*;
 
 public class Dealership {
     // dealership has a vehicle and vehicle is a color
@@ -54,14 +54,16 @@ public class Dealership {
         inventory.add(vehicle);
     }
 // removes the vehicle object from the dealership list
-    public void removeVehicles(Vehicle vehicle){
-        inventory.remove(vehicle);
+    public void removeVehicles(int vin){
+        for(Vehicle v : inventory){
+            if(v.getVin() == vin){
+                inventory.remove(v);
+            }
+        }
     }
-
     public List<Vehicle> getAllVehicles(){
         return inventory;
     }
-
     public void byPrice(double min, double max){
         for(Vehicle v: inventory){
             if(v.getPrice() >= min && v.getPrice() <= max){
@@ -69,7 +71,6 @@ public class Dealership {
             }
         }
     }
-
     public void byMakeModel(String make, String model){
         for(Vehicle v:inventory){
             if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)){
@@ -77,7 +78,6 @@ public class Dealership {
             }
         }
     }
-
     public void byYear(int min, int max){
         for(Vehicle v : inventory){
             if(v.getYear() >= min && v.getYear() <= max){
@@ -85,7 +85,6 @@ public class Dealership {
             }
         }
     }
-
     public void byColor(String color) {
         for(Vehicle v : inventory){
             if(v.getColor().equalsIgnoreCase(color)){
@@ -93,7 +92,6 @@ public class Dealership {
             }
         }
     }
-
     public void byMileage(int min, int max){
         for(Vehicle v : inventory){
             if(v.getOdometer() >= min && v.getOdometer() <= max){
@@ -101,7 +99,6 @@ public class Dealership {
             }
         }
     }
-
     public void byType(String type){
         for(Vehicle v : inventory){
             if(v.getType().equalsIgnoreCase(type)){
