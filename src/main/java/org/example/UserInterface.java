@@ -3,29 +3,41 @@ package org.example;
 import java.util.Scanner;
 import org.example.Dealership.*;
 public class UserInterface {
+    private Dealership dealership;
     //the menus and the confirmations
     //to strings - vin|year|make|modle|type|color|odometer|price
     //while loop
-//<editor-fold desc="fix it ">
-    static Dealership dealership = new Dealership("Painters Garage","1002 Main Street","803-209-6747");
-    Scanner scanner = new Scanner(System.in);
-
-
-    // </editor-fold>
+//<editor-fold desc=" ">
+    public UserInterface(){
+        Scanner scanner = new Scanner(System.in);
+        init();
+    }
+    private void init(){
+        // when u call a class you are creating a label
+        // in it is a method that fills the method with data
+        // when u write private you are declaring it -- this just say i will have a dealership object in here but it is null rn.
+        // init - intialize start the file manager and reads the cvs and constructs the objects
+        DealershipFileManager fileManager = new DealershipFileManager();
+        this.dealership = fileManager.getDealership();
+    }
+// reevaulate if something is static
+//only methods get dealersp and save delaership are the only
+    // reformat to rename
+    // </editor
 
 //<editor-fold desc="UserInterface Methods">
-    public static void menu(){
+    public void menu(){
         System.out.println("1) List All Vehicles"+
-                "\n2)"+
-                "\n3)" +
-                "\n4)"+
-                "\n5)"+
-                "\n6)"+
-                "\n7)"+
-                "\n8)"+
-                "\n9)");
+                "\n2) Add a Vehicle"+
+                "\n3) Find Vehicle by Price " +
+                "\n4) Find Vehicle by Make and Model"+
+                "\n5) Find Vehicle by Year"+
+                "\n6) Find Vehicle by Mileage"+
+                "\n7) Find Vehicle by Vehicle Type"+
+                "\n8) Find Vehicle by Color"+
+                "\n9) Remove Vehicle from Dealership");
     }
-    public static void uiAddVehicle(Scanner scanner){
+    public void uiAddVehicle(Scanner scanner){
         System.out.println("Lets add a Vehicle\n"+
                 "Enter the last 5 digits of the Vin Number");
         int vin = scanner.nextInt();
@@ -48,52 +60,52 @@ public class UserInterface {
         dealership.addVehicle(vehicle);
         System.out.println("The Vehicle has been added to the Inventory");
     }
-    public static void uiRemoveVehicle(Scanner scanner){
+    public void uiRemoveVehicle(Scanner scanner){
         System.out.println("Which Vehicle would you like to Remove"+
                 "Enter the Vin");
         int vin = scanner.nextInt();
         dealership.removeVehicles(vin);
         System.out.println("The Vehicle has been removed from the Inventory");
     }
-    public static void uiAllVehicle(){
+    public void uiAllVehicle(){
         for(Vehicle V : dealership.getAllVehicles()){
             V.toString();
         }
     }
-    public static void uiByPrice(Scanner scanner){
+    public void uiByPrice(Scanner scanner){
         System.out.println("What is the Min of the Vehicle Price Range?");
         double min = scanner.nextDouble();
         System.out.println("What is the Max of the Vehicle Price Range?");
         double max = scanner.nextDouble();
         dealership.byPrice(min,max);
     }
-    public static void uiByMakeModel(Scanner scanner){
+    public void uiByMakeModel(Scanner scanner){
         System.out.println("What is the Make of the Vehicle you're looking for?");
         String make = scanner.nextLine();
         System.out.println("What is the Model of the Vehicle you're looking for?");
         String model = scanner.nextLine();
         dealership.byMakeModel(make,model);
     }
-    public static void uiByYear(Scanner scanner){
+    public void uiByYear(Scanner scanner){
         System.out.println("What is the min Year of the Vehicle you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Year of the Vehicle you're looking for? ");
         int max = scanner.nextInt();
         dealership.byYear(min,max);
     }
-    public static void uiByColor(Scanner scanner){
+    public void uiByColor(Scanner scanner){
         System.out.println("What is the color of Vehicle you're looking for?");
         String color = scanner.nextLine();
         dealership.byColor(color);
     }
-    public static void uiByMileage(Scanner scanner){
+    public void uiByMileage(Scanner scanner){
         System.out.println("What is the min Mileage you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Mileage you're looking for?");
         int max = scanner.nextInt();
         dealership.byMileage(min,max);
     }
-    public static void uiByType(Scanner scanner){
+    public void uiByType(Scanner scanner){
         System.out.println("What is the Vehicle Type are you looking for?");
         String type = scanner.nextLine();
         dealership.byType(type);

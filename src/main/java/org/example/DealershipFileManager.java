@@ -13,15 +13,12 @@ public class DealershipFileManager {
     public Dealership getDealership(){
         Dealership dealership = null;
 
-    try{
+        try{
         FileReader fileReader = new FileReader("src/main/resources/Vehicles.csv");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String input;
-
-        if((input = bufferedReader.readLine()) != null){
-            String[] cvRow = input.split("\\|");
-            dealership = new Dealership(cvRow[0],cvRow[1],cvRow[2]);
-        }
+//format another csv for dealership
+            dealership = new Dealership("Painters Garage","1002 Main Street","803-209-6747");
 
         while((input = bufferedReader.readLine()) != null){
             String[] csvRow = input.split("\\|");
