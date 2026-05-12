@@ -1,15 +1,16 @@
 package org.example;
 
 import java.util.Scanner;
-import org.example.Dealership.*;
+
 public class UserInterface {
     private Dealership dealership;
+    private Scanner scanner;
     //the menus and the confirmations
     //to strings - vin|year|make|modle|type|color|odometer|price
     //while loop
 //<editor-fold desc="">
     public UserInterface(){
-        Scanner scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
         init();
     }
     private void init(){
@@ -23,11 +24,43 @@ public class UserInterface {
 
     public void Display(){
         init();
-        while(true){
+        boolean run = true;
+        while(run){
            display();
+           String uI = scanner.nextLine();
 
+           switch(uI){
+               case "1":
+                 processAllVehicleRequest();
+                 break;
+               case "2":
+                   processAddVehicleRequest();
+                   break;
+               case "3":
+                   processByPriceRequest();
+                   break;
+               case "4":
+                   processByMakeModelRequest();
+                   break;
+               case "5":
+                   processByYearRequest();
+                   break;
+               case "6":
+                   processByMileageRequest();
+                   break;
+               case "7":
+                   processByTypeRequest();
+                   break;
+               case "8":
+                   processByColorRequest();
+                   break;
+               case "9":
+                   processRemoveVehicleRequest();
+                   break;
+               default:
+                   System.out.println("Please make a selection 1-9");
+           }
         }
-
     }
     // </editor
 
@@ -43,7 +76,7 @@ public class UserInterface {
                 "\n8) Find Vehicle by Color"+
                 "\n9) Remove Vehicle from Dealership");
     }
-    public void processAddVehicleRequest(Scanner scanner){
+    public void processAddVehicleRequest(){
         System.out.println("Lets add a Vehicle\n"+
                 "Enter the last 5 digits of the Vin Number");
         int vin = scanner.nextInt();
@@ -64,9 +97,10 @@ public class UserInterface {
         double price = scanner.nextDouble();
         Vehicle vehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
         dealership.addVehicle(vehicle);
+        DealershipFileManager.writeDealership(dealership);
         System.out.println("The Vehicle has been added to the Inventory");
     }
-    public void processRemoveVehicleRequest(Scanner scanner){
+    public void processRemoveVehicleRequest(){
         System.out.println("Which Vehicle would you like to Remove"+
                 "Enter the Vin");
         int vin = scanner.nextInt();
@@ -74,44 +108,45 @@ public class UserInterface {
         System.out.println("The Vehicle has been removed from the Inventory");
     }
     public void processAllVehicleRequest(){
+        System.out.println("Painter Garage|1002 Main Street|803-209-6747\n");
         for(Vehicle V : dealership.getAllVehicles()){
-            V.toString();
+            System.out.println(V.toString());
         }
     }
-    public void processByPriceRequest(Scanner scanner){
+    public void processByPriceRequest(){
         System.out.println("What is the Min of the Vehicle Price Range?");
         double min = scanner.nextDouble();
         System.out.println("What is the Max of the Vehicle Price Range?");
         double max = scanner.nextDouble();
         dealership.byPrice(min,max);
     }
-    public void processByMakeModelRequest(Scanner scanner){
+    public void processByMakeModelRequest(){
         System.out.println("What is the Make of the Vehicle you're looking for?");
         String make = scanner.nextLine();
         System.out.println("What is the Model of the Vehicle you're looking for?");
         String model = scanner.nextLine();
         dealership.byMakeModel(make,model);
     }
-    public void processByYearRequest(Scanner scanner){
+    public void processByYearRequest(){
         System.out.println("What is the min Year of the Vehicle you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Year of the Vehicle you're looking for? ");
         int max = scanner.nextInt();
         dealership.byYear(min,max);
     }
-    public void processByColorRequest(Scanner scanner){
+    public void processByColorRequest(){
         System.out.println("What is the color of Vehicle you're looking for?");
         String color = scanner.nextLine();
         dealership.byColor(color);
     }
-    public void processByMileageRequest(Scanner scanner){
+    public void processByMileageRequest(){
         System.out.println("What is the min Mileage you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Mileage you're looking for?");
         int max = scanner.nextInt();
         dealership.byMileage(min,max);
     }
-    public void processByTypeRequest(Scanner scanner){
+    public void processByTypeRequest(){
         System.out.println("What is the Vehicle Type are you looking for?");
         String type = scanner.nextLine();
         dealership.byType(type);

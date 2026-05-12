@@ -88,8 +88,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Painter Garage|1002 Main Street|803-209-6747\n" +
-                vin +
+        return vin +
                 "|" + year +
                 "|" + make +
                 "|" + model +
