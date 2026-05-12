@@ -7,7 +7,7 @@ public class UserInterface {
     //the menus and the confirmations
     //to strings - vin|year|make|modle|type|color|odometer|price
     //while loop
-//<editor-fold desc=" ">
+//<editor-fold desc="">
     public UserInterface(){
         Scanner scanner = new Scanner(System.in);
         init();
@@ -20,13 +20,19 @@ public class UserInterface {
         DealershipFileManager fileManager = new DealershipFileManager();
         this.dealership = fileManager.getDealership();
     }
-// reevaulate if something is static
-//only methods get dealersp and save delaership are the only
-    // reformat to rename
+
+    public void Display(){
+        init();
+        while(true){
+           display();
+
+        }
+
+    }
     // </editor
 
 //<editor-fold desc="UserInterface Methods">
-    public void menu(){
+    public void display(){
         System.out.println("1) List All Vehicles"+
                 "\n2) Add a Vehicle"+
                 "\n3) Find Vehicle by Price " +
@@ -37,7 +43,7 @@ public class UserInterface {
                 "\n8) Find Vehicle by Color"+
                 "\n9) Remove Vehicle from Dealership");
     }
-    public void uiAddVehicle(Scanner scanner){
+    public void processAddVehicleRequest(Scanner scanner){
         System.out.println("Lets add a Vehicle\n"+
                 "Enter the last 5 digits of the Vin Number");
         int vin = scanner.nextInt();
@@ -60,52 +66,52 @@ public class UserInterface {
         dealership.addVehicle(vehicle);
         System.out.println("The Vehicle has been added to the Inventory");
     }
-    public void uiRemoveVehicle(Scanner scanner){
+    public void processRemoveVehicleRequest(Scanner scanner){
         System.out.println("Which Vehicle would you like to Remove"+
                 "Enter the Vin");
         int vin = scanner.nextInt();
         dealership.removeVehicles(vin);
         System.out.println("The Vehicle has been removed from the Inventory");
     }
-    public void uiAllVehicle(){
+    public void processAllVehicleRequest(){
         for(Vehicle V : dealership.getAllVehicles()){
             V.toString();
         }
     }
-    public void uiByPrice(Scanner scanner){
+    public void processByPriceRequest(Scanner scanner){
         System.out.println("What is the Min of the Vehicle Price Range?");
         double min = scanner.nextDouble();
         System.out.println("What is the Max of the Vehicle Price Range?");
         double max = scanner.nextDouble();
         dealership.byPrice(min,max);
     }
-    public void uiByMakeModel(Scanner scanner){
+    public void processByMakeModelRequest(Scanner scanner){
         System.out.println("What is the Make of the Vehicle you're looking for?");
         String make = scanner.nextLine();
         System.out.println("What is the Model of the Vehicle you're looking for?");
         String model = scanner.nextLine();
         dealership.byMakeModel(make,model);
     }
-    public void uiByYear(Scanner scanner){
+    public void processByYearRequest(Scanner scanner){
         System.out.println("What is the min Year of the Vehicle you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Year of the Vehicle you're looking for? ");
         int max = scanner.nextInt();
         dealership.byYear(min,max);
     }
-    public void uiByColor(Scanner scanner){
+    public void processByColorRequest(Scanner scanner){
         System.out.println("What is the color of Vehicle you're looking for?");
         String color = scanner.nextLine();
         dealership.byColor(color);
     }
-    public void uiByMileage(Scanner scanner){
+    public void processByMileageRequest(Scanner scanner){
         System.out.println("What is the min Mileage you're looking for?");
         int min = scanner.nextInt();
         System.out.println("What is the max Mileage you're looking for?");
         int max = scanner.nextInt();
         dealership.byMileage(min,max);
     }
-    public void uiByType(Scanner scanner){
+    public void processByTypeRequest(Scanner scanner){
         System.out.println("What is the Vehicle Type are you looking for?");
         String type = scanner.nextLine();
         dealership.byType(type);

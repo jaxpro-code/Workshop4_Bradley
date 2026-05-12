@@ -10,7 +10,7 @@ import org.example.UserInterface.*;
 
 public class DealershipFileManager {
     // the file belongs to the object dealership
-    public Dealership getDealership(){
+    public static Dealership getDealership(){
         Dealership dealership = null;
 
         try{
@@ -43,7 +43,7 @@ public class DealershipFileManager {
 
     return dealership;
 }
-    public void writeDealership(Dealership dealership){
+    public static void writeDealership(Dealership dealership){
         try {
             File file = new File("src/main/resources/Vehicle.csv");
             FileWriter fileWriter = new FileWriter(file, true);
