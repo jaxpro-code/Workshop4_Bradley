@@ -8,7 +8,8 @@ public class UserInterface {
     //the menus and the confirmations
     //to strings - vin|year|make|modle|type|color|odometer|price
     //while loop
-//<editor-fold desc="">
+
+//<editor-fold desc="ui">
     public UserInterface(){
         this.scanner = new Scanner(System.in);
         init();
@@ -62,7 +63,7 @@ public class UserInterface {
            }
         }
     }
-    // </editor
+    // </editor-fold>
 
 //<editor-fold desc="UserInterface Methods">
     public void display(){
