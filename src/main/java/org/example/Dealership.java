@@ -67,42 +67,42 @@ public class Dealership {
     public void byPrice(double min, double max){
         for(Vehicle v: inventory){
             if(v.getPrice() >= min && v.getPrice() <= max){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
     public void byMakeModel(String make, String model){
         for(Vehicle v:inventory){
             if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
     public void byYear(int min, int max){
         for(Vehicle v : inventory){
             if(v.getYear() >= min && v.getYear() <= max){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
     public void byColor(String color) {
         for(Vehicle v : inventory){
             if(v.getColor().equalsIgnoreCase(color)){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
     public void byMileage(int min, int max){
         for(Vehicle v : inventory){
             if(v.getOdometer() >= min && v.getOdometer() <= max){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
     public void byType(String type){
         for(Vehicle v : inventory){
             if(v.getType().equalsIgnoreCase(type)){
-                v.toString();
+                System.out.println(v.toString());
             }
         }
     }
