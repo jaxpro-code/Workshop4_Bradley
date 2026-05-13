@@ -19,12 +19,10 @@ public class UserInterface {
         // in it is a method that fills the method with data
         // when u write private you are declaring it -- this just say i will have a dealership object in here but it is null rn.
         // init - intialize start the file manager and reads the cvs and constructs the objects
-        DealershipFileManager fileManager = new DealershipFileManager();
-        this.dealership = fileManager.getDealership();
+        this.dealership = DealershipFileManager.getDealership();
     }
 
     public void Display(){
-        init();
         boolean run = true;
         while(run){
            display();
@@ -60,6 +58,7 @@ public class UserInterface {
                    break;
                default:
                    System.out.println("Please make a selection 1-9");
+                   break;
            }
         }
     }
@@ -116,9 +115,9 @@ public class UserInterface {
     }
     public void processByPriceRequest(){
         System.out.println("What is the Min of the Vehicle Price Range?");
-        double min = scanner.nextDouble();
+        double min = Double.parseDouble(scanner.nextLine());
         System.out.println("What is the Max of the Vehicle Price Range?");
-        double max = scanner.nextDouble();
+        double max = Double.parseDouble(scanner.nextLine());
         dealership.byPrice(min,max);
     }
     public void processByMakeModelRequest(){
