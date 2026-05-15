@@ -1,14 +1,18 @@
 package org.example;
 
+import java.math.BigDecimal;
+
 public abstract class Contract{
     private String dateOf;
     private String customerName;
     private String customerEmail;
+    private Vehicle vehicleSold;
 
-    public Contract(String dateOf, String customerName, String customerEmail) {
+    public Contract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.dateOf = dateOf;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
+        this.vehicleSold = vehicleSold;
     }
 
     public String getDateOf() {
@@ -35,9 +39,17 @@ public abstract class Contract{
         this.customerEmail = customerEmail;
     }
 
-    public abstract void getTotalPrice();
+    public Vehicle getVehicleSold() {
+        return vehicleSold;
+    }
 
-    public abstract void getMonthlyPayment();
+    public void setVehicleSold(Vehicle vehicleSold) {
+        this.vehicleSold = vehicleSold;
+    }
+
+    public abstract BigDecimal getTotalPrice();
+
+    public abstract BigDecimal getMonthlyPayment();
 
 
 

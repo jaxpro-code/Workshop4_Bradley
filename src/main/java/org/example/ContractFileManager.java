@@ -1,0 +1,61 @@
+package org.example;
+
+import java.io.*;
+
+public class ContractFileManager {
+    // the file belongs to the object dealership
+    public static Contract getContact(){
+
+
+        try{
+            FileReader fileReader = new FileReader("src/main/resources/Contract.csv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String input;
+//format another csv for dealership
+            dealership = new Dealership("Painters Garage","1002 Main Street","803-209-6747");
+
+            while((input = bufferedReader.readLine()) != null){
+                String[] csvRow = input.split("\\|");
+                int vin = Integer.parseInt(csvRow[0]);
+                int year = Integer.parseInt(csvRow[1]);
+                String make = csvRow[2];
+                String model = csvRow[3];
+                String type = csvRow[4];
+                String color = csvRow[5];
+                int odometer= Integer.parseInt(csvRow[6]);
+                double price = Double.parseDouble(csvRow[7]);
+
+                Vehicle vehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
+                dealership.addVehicle(vehicle);
+            }
+
+            bufferedReader.close();
+        }
+        catch (IOException ex) {
+            System.out.println("there was a problem with this file ");
+        }
+
+        return dealership;
+    }
+    public static void writeDealership(Dealership dealership){
+        try {
+            File file = new File("src/main/resources/Vehicle.csv");
+            FileWriter fileWriter = new FileWriter(file, true);
+
+            if(file.length() < 0){
+                String header = String.format("%s|%s|%s\n", dealership.getName(),dealership.getAddress(),dealership.getPhone());
+                fileWriter.write(header);
+            }
+
+            for(Vehicle V : dealership.getAllVehicles()) {
+                fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", V.getVin(), V.getYear(), V.getMake(), V.getModel(), V.getType(), V.getColor(), V.getOdometer(), V.getPrice())
+                );
+            }
+
+            fileWriter.close();
+        }
+        catch (IOException ex){
+            System.out.println("error writing to file");
+        }
+    }
+}

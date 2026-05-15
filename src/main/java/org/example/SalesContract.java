@@ -13,16 +13,16 @@ public class SalesContract extends Contract {
     private boolean finance;
     private BigDecimal processFee;
     private double monthlyPayment;
-    private Vehicle vehicleSold;
 
-    public SalesContract(String dateOf, String customerName, String customerEmail, BigDecimal taxAmount, BigDecimal recordFee, boolean finance, BigDecimal processFee, double monthlyPayment, Vehicle vehicleSold) {
-        super(dateOf, customerName, customerEmail);
+
+    public SalesContract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold, Dealership dealership, BigDecimal taxAmount, BigDecimal recordFee, boolean finance, BigDecimal processFee, double monthlyPayment) {
+        super(dateOf, customerName, customerEmail, vehicleSold);
+        this.dealership = dealership;
         this.taxAmount = taxAmount;
         this.recordFee = recordFee;
         this.finance = finance;
         this.processFee = processFee;
         this.monthlyPayment = monthlyPayment;
-        this.vehicleSold = vehicleSold;
     }
 
     public BigDecimal getTaxAmount() {
@@ -69,16 +69,10 @@ public class SalesContract extends Contract {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public Vehicle getVehicleSold() {
-        return vehicleSold;
-    }
 
-    public void setVehicleSold(Vehicle vehicleSold) {
-        this.vehicleSold = vehicleSold;
-    }
 
     @Override
-    public void getMonthlyPayment() {
+    public BigDecimal getMonthlyPayment() {
         BigDecimal P;
         BigDecimal M;
         BigDecimal T;
@@ -87,12 +81,9 @@ public class SalesContract extends Contract {
         BigDecimal Y;
         BigDecimal r = BigDecimal.valueOf(4.25/100);
         BigDecimal n = BigDecimal.valueOf(48);
-        for(Vehicle v : dealership.getAllVehicles()){
-            if(isFinance()){
-                if(v.getPrice() >= 10000){
-                    P = BigDecimal.valueOf(v.getPrice());
-//                    M = BigDecimal.valueOf((P * r) / ( 1 - Math.pow((1 + r), -n)));
-//                    M = P.multiply(r) / (1 - Math.pow((r.add(BigDecimal.valueOf(1)),n.negate()));
+
+// if p is more tha 10k do this math if not do this
+                    P = BigDecimal.valueOf(getVehicleSold().getPrice());
                     X = BigDecimal.ONE.add(r);
                     T = (P.multiply(r).multiply(X.pow(n.intValue())));
                     Y= (X.pow(n.intValue()));
@@ -100,14 +91,16 @@ public class SalesContract extends Contract {
 
                     M = T.divide(B);
 
-                    System.out.println(M);
-                }
-            }
+
+
+        return M;
         }
-    }
+
+
 
     @Override
-    public void getTotalPrice() {
+    public BigDecimal getTotalPrice() {
+        return null;
 
     }
 

@@ -9,12 +9,13 @@ public class LeaseContract extends Contract {
     }
 
     @Override
-    public void getTotalPrice() {
+    public BigDecimal getTotalPrice() {
+        return null;
 
     }
 
     @Override
-    public void getMonthlyPayment() {
+    public BigDecimal getMonthlyPayment() {
         BigDecimal P;
         BigDecimal M;
         BigDecimal T;
@@ -23,9 +24,7 @@ public class LeaseContract extends Contract {
         BigDecimal Y;
         BigDecimal r = BigDecimal.valueOf(4.25/100);
         BigDecimal n = BigDecimal.valueOf(48);
-        for(Vehicle v : dealership.getAllVehicles()){
-            if(isFinance()){
-                if(v.getPrice() >= 10000){
+
                     P = BigDecimal.valueOf(v.getPrice());
 //                    M = BigDecimal.valueOf((P * r) / ( 1 - Math.pow((1 + r), -n)));
 //                    M = P.multiply(r) / (1 - Math.pow((r.add(BigDecimal.valueOf(1)),n.negate()));
@@ -36,9 +35,8 @@ public class LeaseContract extends Contract {
 
                     M = T.divide(B);
 
-                    System.out.println(M);
-                }
-            }
-        }
+                  return M;
+
+
     }
 }
