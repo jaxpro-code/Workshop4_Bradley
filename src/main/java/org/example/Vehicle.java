@@ -11,6 +11,7 @@ public class Vehicle {
     private int odometer;
     private double price;
 
+
     public Vehicle(int vin, int year, String make, String model, String type, String color, int odometer, double price) {
         this.vin = vin;
         this.year = year;
@@ -85,6 +86,7 @@ public class Vehicle {
     public void setPrice(double price) {
         this.price = price;
     }
+
 
     @Override
     public String toString() {

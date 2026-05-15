@@ -95,6 +95,7 @@ public class UserInterface {
         int odometer = scanner.nextInt();
         System.out.println("Enter the Vehicle Price");
         double price = scanner.nextDouble();
+        boolean sold = false;
         Vehicle vehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
         dealership.addVehicle(vehicle);
         DealershipFileManager.writeDealership(dealership);
