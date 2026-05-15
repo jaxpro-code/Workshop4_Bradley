@@ -12,8 +12,26 @@ public class ContractFileManager {
             if(contract instanceof SalesContract){
                 SalesContract C = (SalesContract) contract;
 
-                DATA = String.format("SALE|%s|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%b|%.2f\n",C.getDateOf(),C.getCustomerName(),C.getCustomerEmail(),C.getVehicleSold().getVin(),C.getVehicleSold().getYear(),C.getVehicleSold().getMake(),C.getVehicleSold().getModel()
-                ,C.getVehicleSold().getType(),C.getVehicleSold().getColor(),C.getVehicleSold().getOdometer(),C.getVehicleSold().getPrice(),C.getTaxAmount(),C.getRecordFee(),C.getProcessFee(),C.getTotalPrice(),C.isFinance(),C.getMonthlyPayment());
+                DATA = String.format(
+                        "SALE|%s|%s|%s|%s|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%b|%.2f\n",
+                        C.getDateOf(),
+                        C.getCustomerName(),
+                        C.getCustomerEmail(),
+                        C.getVehicleSold().getVin(),
+                        C.getVehicleSold().getYear(),
+                        C.getVehicleSold().getMake(),
+                        C.getVehicleSold().getModel(),
+                        C.getVehicleSold().getType(),
+                        C.getVehicleSold().getColor(),
+                        C.getVehicleSold().getOdometer(),
+                        C.getVehicleSold().getPrice(),
+                        C.getTaxAmount(),
+                        C.getRecordFee(),
+                        C.getProcessFee(),
+                        C.getTotalPrice(),
+                        C.isFinance(),
+                        C.getMonthlyPayment()
+                );
             }
 
             else if(contract instanceof LeaseContract){

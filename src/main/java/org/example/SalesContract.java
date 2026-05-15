@@ -49,15 +49,12 @@ public class SalesContract extends Contract {
         this.finance = finance;
     }
 
-    public void getProcessFee(int vin) {
-        for(Vehicle v: dealership.getAllVehicles()) {
-            if(v.getVin() == vin){
-                if (v.getPrice() < 10000) {
-                    BigDecimal processFee = BigDecimal.valueOf(295);
-                } else {
-                    BigDecimal processFee = BigDecimal.valueOf(495);
-                }
-            }
+    public void getProcessFee() {
+        if (getVehicleSold().getPrice() < 10000) {
+            BigDecimal processFee = BigDecimal.valueOf(295);
+        }
+        else {
+            BigDecimal processFee = BigDecimal.valueOf(495);
         }
     }
 
