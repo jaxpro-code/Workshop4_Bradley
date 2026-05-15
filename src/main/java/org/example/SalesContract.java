@@ -70,6 +70,10 @@ public class SalesContract extends Contract {
     }
 
 
+    @Override
+    public BigDecimal getTotalPrice() {
+        return null;
+    }
 
     @Override
     public BigDecimal getMonthlyPayment() {
@@ -79,38 +83,35 @@ public class SalesContract extends Contract {
         BigDecimal B;
         BigDecimal X;
         BigDecimal Y;
-        BigDecimal r = BigDecimal.valueOf(4.25/100);
-        BigDecimal n = BigDecimal.valueOf(48);
+        BigDecimal r;
+        BigDecimal n;
+        P = BigDecimal.valueOf(getVehicleSold().getPrice());
+        BigDecimal ten = BigDecimal.valueOf(10000);
 
-// if p is more tha 10k do this math if not do this
-                    P = BigDecimal.valueOf(getVehicleSold().getPrice());
-                    X = BigDecimal.ONE.add(r);
-                    T = (P.multiply(r).multiply(X.pow(n.intValue())));
-                    Y= (X.pow(n.intValue()));
-                    B = BigDecimal.ONE.subtract(Y);
+        if (P.compareTo(ten) >= 0) {
+            r = BigDecimal.valueOf(4.25 / 100);
+            n = BigDecimal.valueOf(48);
 
-                    M = T.divide(B);
+            X = BigDecimal.ONE.add(r);
+            T = (P.multiply(r).multiply(X.pow(n.intValue())));
+            Y = (X.pow(n.intValue()));
+            B = BigDecimal.ONE.subtract(Y);
 
+            M = T.divide(B);
+        } else {
+            r = BigDecimal.valueOf(5.25 / 100);
+            n = BigDecimal.valueOf(24);
 
+            X = BigDecimal.ONE.add(r);
+            T = (P.multiply(r).multiply(X.pow(n.intValue())));
+            Y = (X.pow(n.intValue()));
+            B = BigDecimal.ONE.subtract(Y);
 
-        return M;
+            M = T.divide(B);
         }
-
-
-
-    @Override
-    public BigDecimal getTotalPrice() {
-        return null;
-
+        return M;
     }
-
-// </editor-fold>
-
-
-
-
-
-
+    // </editor-fold>
 
 
 

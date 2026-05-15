@@ -3,56 +3,27 @@ package org.example;
 import java.io.*;
 
 public class ContractFileManager {
-    // the file belongs to the object dealership
-    public static Contract getContact(){
-
-
-        try{
-            FileReader fileReader = new FileReader("src/main/resources/Contract.csv");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String input;
-//format another csv for dealership
-            dealership = new Dealership("Painters Garage","1002 Main Street","803-209-6747");
-
-            while((input = bufferedReader.readLine()) != null){
-                String[] csvRow = input.split("\\|");
-                int vin = Integer.parseInt(csvRow[0]);
-                int year = Integer.parseInt(csvRow[1]);
-                String make = csvRow[2];
-                String model = csvRow[3];
-                String type = csvRow[4];
-                String color = csvRow[5];
-                int odometer= Integer.parseInt(csvRow[6]);
-                double price = Double.parseDouble(csvRow[7]);
-
-                Vehicle vehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
-                dealership.addVehicle(vehicle);
-            }
-
-            bufferedReader.close();
-        }
-        catch (IOException ex) {
-            System.out.println("there was a problem with this file ");
-        }
-
-        return dealership;
-    }
-    public static void writeDealership(Dealership dealership){
+    public static void saveContract (Contract contract){
         try {
-            File file = new File("src/main/resources/Vehicle.csv");
+            File file = new File("src/main/resources/Contract.csv");
             FileWriter fileWriter = new FileWriter(file, true);
+            String DATA = "";
 
-            if(file.length() < 0){
-                String header = String.format("%s|%s|%s\n", dealership.getName(),dealership.getAddress(),dealership.getPhone());
-                fileWriter.write(header);
+            if(contract instanceof SalesContract){
+                SalesContract C = (SalesContract) contract;
+
+                DATA = String.format("SALE|%s|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%b|%.2f\n",C.getDateOf(),C.getCustomerName(),C.getCustomerEmail(),C.getVehicleSold().getVin(),C.getVehicleSold().getYear(),C.getVehicleSold().getMake(),C.getVehicleSold().getModel()
+                ,C.getVehicleSold().getType(),C.getVehicleSold().getColor(),C.getVehicleSold().getOdometer(),C.getVehicleSold().getPrice(),C.getTaxAmount(),C.getRecordFee(),C.getProcessFee(),C.getTotalPrice(),C.isFinance(),C.getMonthlyPayment());
             }
 
-            for(Vehicle V : dealership.getAllVehicles()) {
-                fileWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%f", V.getVin(), V.getYear(), V.getMake(), V.getModel(), V.getType(), V.getColor(), V.getOdometer(), V.getPrice())
-                );
+            else if(contract instanceof LeaseContract){
+                LeaseContract S = (LeaseContract) contract;
+
+                DATA = String.format("LEASE|%s|%s|%s|%s|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f\n", S.getDateOf(), S.getCustomerName(), S.getCustomerEmail(), S.getVehicleSold().getVin(), S.getVehicleSold().getYear(), S.getVehicleSold().getMake(), S.getVehicleSold().getModel(),
+                        S.getVehicleSold().getType(), S.getVehicleSold().getColor(), S.getVehicleSold().getOdometer(), S.getVehicleSold().getPrice(), S.getEndingValue(), S.getLeaseFee(), S.getTotalPrice(), S.getMonthlyPayment());
             }
 
-            fileWriter.close();
+            fileWriter.write(DATA);
         }
         catch (IOException ex){
             System.out.println("error writing to file");

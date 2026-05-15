@@ -3,9 +3,29 @@ package org.example;
 import java.math.BigDecimal;
 
 public class LeaseContract extends Contract {
+    private BigDecimal endingValue;
+    private BigDecimal leaseFee;
 
-    public LeaseContract(String dateOf, String customerName, String customerEmail) {
-        super(dateOf, customerName, customerEmail);
+    public LeaseContract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold, BigDecimal endingValue, BigDecimal leaseFee) {
+        super(dateOf, customerName, customerEmail, vehicleSold);
+        this.endingValue = endingValue;
+        this.leaseFee = leaseFee;
+    }
+
+    public BigDecimal getLeaseFee() {
+        return leaseFee;
+    }
+
+    public void setLeaseFee(BigDecimal leaseFee) {
+        this.leaseFee = leaseFee;
+    }
+
+    public BigDecimal getEndingValue() {
+        return endingValue;
+    }
+
+    public void setEndingValue(BigDecimal endingValue) {
+        this.endingValue = endingValue;
     }
 
     @Override
@@ -22,21 +42,23 @@ public class LeaseContract extends Contract {
         BigDecimal B;
         BigDecimal X;
         BigDecimal Y;
-        BigDecimal r = BigDecimal.valueOf(4.25/100);
-        BigDecimal n = BigDecimal.valueOf(48);
+        BigDecimal r;
+        BigDecimal n;
+        P = BigDecimal.valueOf(getVehicleSold().getPrice());
 
-                    P = BigDecimal.valueOf(v.getPrice());
-//                    M = BigDecimal.valueOf((P * r) / ( 1 - Math.pow((1 + r), -n)));
-//                    M = P.multiply(r) / (1 - Math.pow((r.add(BigDecimal.valueOf(1)),n.negate()));
-                    X = BigDecimal.ONE.add(r);
-                    T = (P.multiply(r).multiply(X.pow(n.intValue())));
-                    Y= (X.pow(n.intValue()));
-                    B = BigDecimal.ONE.subtract(Y);
+        r = BigDecimal.valueOf(4.00 / 100);
+        n = BigDecimal.valueOf(36);
 
-                    M = T.divide(B);
+        X = BigDecimal.ONE.add(r);
+        T = (P.multiply(r).multiply(X.pow(n.intValue())));
+        Y = (X.pow(n.intValue()));
+        B = BigDecimal.ONE.subtract(Y);
 
-                  return M;
+        M = T.divide(B);
 
 
+        return M;
     }
+
+
 }
