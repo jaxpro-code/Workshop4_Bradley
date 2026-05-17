@@ -30,8 +30,10 @@ public class LeaseContract extends Contract {
 
     @Override
     public BigDecimal getTotalPrice() {
-        return null;
+        BigDecimal price = BigDecimal.valueOf(getVehicleSold().getPrice());
+        BigDecimal total = price.add(leaseFee);
 
+        return total;
     }
 
     @Override

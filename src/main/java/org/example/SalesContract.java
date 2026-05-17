@@ -1,9 +1,6 @@
 package org.example;
 
 import java.math.BigDecimal;
-import org.example.Vehicle.*;
-import org.example.Dealership.*;
-import org.w3c.dom.ls.LSOutput;
 
 public class SalesContract extends Contract {
     //<editor-fold desc="Sales Contract Constructor">
@@ -49,13 +46,14 @@ public class SalesContract extends Contract {
         this.finance = finance;
     }
 
-    public void getProcessFee() {
+    public BigDecimal getProcessFee() {
         if (getVehicleSold().getPrice() < 10000) {
             BigDecimal processFee = BigDecimal.valueOf(295);
         }
         else {
             BigDecimal processFee = BigDecimal.valueOf(495);
         }
+        return processFee;
     }
 
     public void setProcessFee(BigDecimal processFee) {
@@ -69,7 +67,10 @@ public class SalesContract extends Contract {
 
     @Override
     public BigDecimal getTotalPrice() {
-        return null;
+        BigDecimal price = BigDecimal.valueOf(getVehicleSold().getPrice());
+        BigDecimal total = price.add(getProcessFee());
+
+        return total;
     }
 
     @Override
