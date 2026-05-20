@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class SalesContract extends Contract {
     //<editor-fold desc="Sales Contract Constructor">
-    private Dealership dealership;
     private BigDecimal taxAmount;
     private BigDecimal recordFee;
     private boolean finance;
@@ -12,9 +11,8 @@ public class SalesContract extends Contract {
     private double monthlyPayment;
 
 
-    public SalesContract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold, Dealership dealership, BigDecimal taxAmount, BigDecimal recordFee, boolean finance, BigDecimal processFee, double monthlyPayment) {
+    public SalesContract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold, BigDecimal taxAmount, BigDecimal recordFee, boolean finance, BigDecimal processFee, double monthlyPayment) {
         super(dateOf, customerName, customerEmail, vehicleSold);
-        this.dealership = dealership;
         this.taxAmount = taxAmount;
         this.recordFee = recordFee;
         this.finance = finance;
@@ -48,10 +46,10 @@ public class SalesContract extends Contract {
 
     public BigDecimal getProcessFee() {
         if (getVehicleSold().getPrice() < 10000) {
-            BigDecimal processFee = BigDecimal.valueOf(295);
+             processFee = BigDecimal.valueOf(295);
         }
         else {
-            BigDecimal processFee = BigDecimal.valueOf(495);
+            processFee = BigDecimal.valueOf(495);
         }
         return processFee;
     }
