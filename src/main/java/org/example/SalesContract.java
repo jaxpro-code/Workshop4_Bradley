@@ -21,7 +21,7 @@ public class SalesContract extends Contract {
     }
 
     public BigDecimal getTaxAmount() {
-        return BigDecimal.valueOf(0.05);
+        return BigDecimal.valueOf(getVehicleSold().getPrice()).multiply(BigDecimal.valueOf(0.05));
     }
 
     public void setTaxAmount(BigDecimal taxAmount) {
@@ -66,7 +66,7 @@ public class SalesContract extends Contract {
     @Override
     public BigDecimal getTotalPrice() {
         BigDecimal price = BigDecimal.valueOf(getVehicleSold().getPrice());
-        BigDecimal total = price.add(getProcessFee());
+        BigDecimal total = price.add(getProcessFee()).add(getTaxAmount()).add(getRecordFee());
 
         return total;
     }
@@ -88,10 +88,11 @@ public class SalesContract extends Contract {
             r = BigDecimal.valueOf(4.25 / 100);
             n = BigDecimal.valueOf(48);
 
-            X = BigDecimal.ONE.add(r);
-            T = (P.multiply(r).multiply(X.pow(n.intValue())));
-            Y = (X.pow(n.intValue()));
-            B = BigDecimal.ONE.subtract(Y);
+            X = BigDecimal.ONE.add(r);//(1+r)
+            T = (P.multiply(r).multiply(X.pow(n.intValue()))); //(p x r(1+r)n
+            Y = BigDecimal.ONE.subtract(X);
+            B = (P.multiply(Y.pow(n.intValue())));
+
 
             M = T.divide(B);
         } else {
@@ -100,8 +101,9 @@ public class SalesContract extends Contract {
 
             X = BigDecimal.ONE.add(r);
             T = (P.multiply(r).multiply(X.pow(n.intValue())));
-            Y = (X.pow(n.intValue()));
-            B = BigDecimal.ONE.subtract(Y);
+            Y = BigDecimal.ONE.subtract(X);
+            B = (P.multiply(Y.pow(n.intValue())));
+
 
             M = T.divide(B);
         }

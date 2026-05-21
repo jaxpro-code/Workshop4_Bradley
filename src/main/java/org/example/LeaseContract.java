@@ -13,19 +13,12 @@ public class LeaseContract extends Contract {
     }
 
     public BigDecimal getLeaseFee() {
-        return leaseFee;
+        return BigDecimal.valueOf(getVehicleSold().getPrice()).multiply(BigDecimal.valueOf(0.07));
     }
 
-    public void setLeaseFee(BigDecimal leaseFee) {
-        this.leaseFee = leaseFee;
-    }
 
     public BigDecimal getEndingValue() {
-        return endingValue;
-    }
-
-    public void setEndingValue(BigDecimal endingValue) {
-        this.endingValue = endingValue;
+        return BigDecimal.valueOf(getVehicleSold().getPrice()).multiply(BigDecimal.valueOf(0.50));
     }
 
     @Override
@@ -47,17 +40,16 @@ public class LeaseContract extends Contract {
         BigDecimal r;
         BigDecimal n;
         P = BigDecimal.valueOf(getVehicleSold().getPrice());
-
         r = BigDecimal.valueOf(4.00 / 100);
         n = BigDecimal.valueOf(36);
 
         X = BigDecimal.ONE.add(r);
         T = (P.multiply(r).multiply(X.pow(n.intValue())));
-        Y = (X.pow(n.intValue()));
-        B = BigDecimal.ONE.subtract(Y);
+        Y = BigDecimal.ONE.subtract(X);
+        B = (P.multiply(Y.pow(n.intValue())));
+
 
         M = T.divide(B);
-
 
         return M;
     }
