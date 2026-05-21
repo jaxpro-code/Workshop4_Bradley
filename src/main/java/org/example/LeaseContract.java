@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 public class LeaseContract extends Contract {
     private BigDecimal endingValue;
     private BigDecimal leaseFee;
+    private BigDecimal monthlyPayment;
 
     public LeaseContract(String dateOf, String customerName, String customerEmail, Vehicle vehicleSold, BigDecimal endingValue, BigDecimal leaseFee) {
         super(dateOf, customerName, customerEmail, vehicleSold);
         this.endingValue = endingValue;
         this.leaseFee = leaseFee;
+        this.monthlyPayment = monthlyPayment;
     }
 
     public BigDecimal getLeaseFee() {
@@ -23,10 +25,10 @@ public class LeaseContract extends Contract {
 
     @Override
     public BigDecimal getTotalPrice() {
-        BigDecimal price = BigDecimal.valueOf(getVehicleSold().getPrice());
-        BigDecimal total = price.add(leaseFee);
+        BigDecimal price = getEndingValue().add(getLeaseFee());
 
-        return total;
+
+        return price;
     }
 
     @Override
